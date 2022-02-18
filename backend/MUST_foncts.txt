@@ -1,0 +1,16 @@
+Employee
+Login/SignUp
+Add Order
+
+See all orders by status
+
+Deliverer
+Login/SignUp
+// later this weeek if time Assign Order
+mark delivering
+mark delivered
+
+
+Global
+
+See all orders
