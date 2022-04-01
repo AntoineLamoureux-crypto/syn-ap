@@ -41,16 +41,6 @@ function Spinner() {
         variants={loadingCircleVariants}
         transition={loadingCircleTransition}
     />
-    <motion.span
-        style={loadingCircle}
-        variants={loadingCircleVariants}
-        transition={loadingCircleTransition}
-    />
-    <motion.span
-        style={loadingCircle}
-        variants={loadingCircleVariants}
-        transition={loadingCircleTransition}
-    />
     </motion.div>
   )
 }

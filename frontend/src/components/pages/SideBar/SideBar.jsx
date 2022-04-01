@@ -6,7 +6,8 @@ import {
     Divider,
     Avatar,
     Heading,
-    Box
+    Box,
+    useColorMode
 } from '@chakra-ui/react'
 
 import {
@@ -19,14 +20,16 @@ import {
 import { BiLogOut } from 'react-icons/bi'
 import { MdOutlineCreateNewFolder } from 'react-icons/md'
 import { VscFiles } from 'react-icons/vsc' 
+import ColorMode from '../ColorMode'
 
 import NavItem from './NavItem'
 
 function Sidebar({ currentUser, chooseOption }) {
     const currentDeliverer= localStorage.getItem("currentDeliverer")
     const currentEmployee = localStorage.getItem("currentEmployee")
-
+    const { colorMode } = useColorMode()
     const [navSize, changeNavSize] = useState("large")
+
     return (
         <Flex
             pos="sticky"
@@ -39,7 +42,7 @@ function Sidebar({ currentUser, chooseOption }) {
             flexDir="column"
             justifyContent="space-between"
             ml='5'
-            bgColor={'blue.100'}
+            bgColor={colorMode === 'light' ? 'blue.100' : 'gray.900'}
         >
             <Flex
                 p="5%"
@@ -85,7 +88,11 @@ function Sidebar({ currentUser, chooseOption }) {
                         <Heading as="h3" size="sm">{currentUser.firstName} {currentUser.lastName}</Heading>
                         {currentDeliverer ? <Text my={'1'} color="gray">Deliverer</Text> : <Text my={'1'} color="gray">Employee</Text>}
                     </Flex>
+                    
                 </Flex>
+                <Box mt={2}>
+                    <ColorMode />
+                </Box>
             </Flex>
         </Flex>
     )

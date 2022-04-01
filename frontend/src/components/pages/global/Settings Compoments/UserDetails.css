@@ -1,0 +1,54 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+
+@import url("https://fonts.googleapis.com/css?family=Inter:400,700,500|Roboto:400,300,700");
+
+.valign-text-middle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.text-only_with-button {
+  align-items: center;
+  background-color: var(--white);
+  border-radius: 12px;
+  box-shadow: 0px 1px 12px #0000000a , 0px 4px 8px #00000014 , 0px 3px 6px #0000001a;
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
+  padding: 16px 0;
+  width: 360px;
+}
+
+.title {
+  height: 32px;
+  letter-spacing: 0;
+  width: 328px;
+}
+
+
+.labeled_centered {
+  align-items: flex-start;
+  align-self: flex-start;
+  border-radius: 8px;
+  display: flex;
+  height: 40px;
+  margin-left: 16px;
+  margin-top: 8px;
+  min-width: 96px;
+  padding: 11px 0;
+}
+
+.label {
+  height: 16px;
+  letter-spacing: 0.10px;
+  line-height: 24px;
+  margin-left: -1px;
+  text-align: center;
+  white-space: nowrap;
+  width: 96px;
+}

@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { useTable, usePagination } from 'react-table'
 import { useState, useEffect } from 'react'
+import { useColorMode } from '@chakra-ui/react'
 
 import {
   Table,
@@ -13,7 +14,8 @@ import {
   Button,
   Box,
   Input,
-  Spinner
+  Spinner,
+  Select
 } from '@chakra-ui/react'
 
 const Styles = styled.div`
@@ -61,33 +63,28 @@ function CTable({
     fetchData({ pageIndex, pageSize })
   }, [fetchData, pageIndex, pageSize])
 
+  const { colorMode } = useColorMode()
+
   return (
     <>
-      <Table {...getTableProps()} variant='striped'>
+      <Table {...getTableProps()} variant='unstyled'>
         <Thead>
           {headerGroups.map(headerGroup => (
             <Tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map(column => (
                 <Th {...column.getHeaderProps()}>
                   {column.render('Header')}
-                  <span>
-                    {column.isSorted
-                      ? column.isSortedDesc
-                        ? ' 🔽'
-                        : ' 🔼'
-                      : ''}
-                  </span>
                 </Th>
               ))}
             </Tr>
           ))}
         </Thead>
         <Tbody {...getTableBodyProps()}>
-          {page.map((row, i) => {
+          {page.map((row) => {
             prepareRow(row)
             return (
               <>
-              <Tr {...row.getRowProps()}>
+              <Tr {...row.getRowProps()} color={colorMode === 'light' ? 'black' : 'white'}>
                 {row.cells.map(cell => {
                   return <><Td {...cell.getCellProps()} >{cell.render('Cell')}</Td></>
                 })}
@@ -138,7 +135,9 @@ function CTable({
             style={{ width: '100px' }}
           />
         </span>{' '}
-        <select
+        <Select
+        w={'10%'}
+        display={'inline-block'}
           value={pageSize}
           onChange={e => {
             setPageSize(Number(e.target.value))
@@ -149,7 +148,7 @@ function CTable({
               Show {pageSize}
             </option>
           ))}
-        </select>
+        </Select>
       </Box>
     </>
   )

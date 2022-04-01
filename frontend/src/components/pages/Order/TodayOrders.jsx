@@ -5,9 +5,8 @@ import { motion, AnimateSharedLayout, AnimatePresence } from "framer-motion";
 import { ViewIcon } from '@chakra-ui/icons'
 import "./css/Styles.css";
 import axios from 'axios'
-import { Radio, RadioGroup, Stack } from '@chakra-ui/react'
-import { useRef } from "react";
-import { useMotionValue } from "framer-motion";
+import { Radio, RadioGroup, Stack, useColorMode } from '@chakra-ui/react'
+import { useToast } from '@chakra-ui/react'
 
 function markDeliveringOrder(id, toast)  {
   axios.post(`http://localhost:9090/modifyOrder/status/delivering/${id}`);
@@ -32,7 +31,11 @@ function markDeliveredOrder(id, toast)  {
 }
 
 
+
+
 function TodayOrders() {
+  const { colorMode } = useColorMode()
+
     const [currentData, setCurrentData] = useState([
         {
           clientName: '',
@@ -43,6 +46,7 @@ function TodayOrders() {
           deliveryTime: ''
         }
       ]);
+
       useEffect(() => {
         const currentUserJSONFormat = localStorage.getItem("currentDeliverer");
         const currentUser = JSON.parse(currentUserJSONFormat);
@@ -57,45 +61,35 @@ function TodayOrders() {
         .then(response => response.json())
         .then(data => setCurrentData(data))
       }, []);
+      
   return (
       <>
     <Box mx={'auto'}>
-        <Text fontFamily={'heading'} fontSize={'30px'} fontWeight={'semibold'} my={'3'} >Orders assigned to me</Text>
+        <Text fontFamily={'heading'} fontSize={'30px'} fontWeight={'semibold'} my={'3'} color={colorMode === 'light' ? 'black' : 'white'} >Orders assigned to me</Text>
     </Box>
+    <Box my={5}>
     <AnimateSharedLayout>
-      <motion.ul layout initial={{ borderRadius: 25 }} >
+      <motion.ul layout initial={{ borderRadius: 25 }}> 
         {currentData.map(item => (
           <> 
-            <Item key={item} data={item} setData={setCurrentData} />
+            <Item key={item} data={item} setData={setCurrentData}/>
           </>
         ))}
       </motion.ul>
     </AnimateSharedLayout>
+    </Box>
     </>
   );
 }
 
 function Item({ data }) {
   const [isOpen, setIsOpen] = useState(false);
-
+  const toast = useToast();
   const toggleOpen = () => setIsOpen(!isOpen);
-
-  const [isOn, setIsOn] = useState(false);
-
-  const toggleSwitch = () => setIsOn(!isOn);
-
-  const constraintsRef = useRef(null);
-  const x = useMotionValue(0);
-
-  const spring = {
-    type: "spring",
-    stiffness: 700,
-    damping: 30
-  };
 
   return (
       <>
-    <motion.li layout initial={{ borderRadius: 10 }} style={{ background: 'rgba(214, 214, 214, 0.5)'}} >
+    <motion.li layout initial={{ borderRadius: 10 }} style={{ background: 'rgba(214, 214, 214, 0.5)'}}>
     <Box w={'100%'} flexDirection={'row'} display={'flex'}>
         <Box onClick={toggleOpen}>
             <motion.div 
@@ -103,7 +97,8 @@ function Item({ data }) {
                 layout
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }} >
+                exit={{ opacity: 0 }} 
+                whileTap={{ scale: 0.9 }} >
             <ViewIcon boxSize={10} />
             </motion.div>
         </Box>
@@ -146,7 +141,7 @@ function Item({ data }) {
                 {data.orderStatus === 'READY' ? 
                 <Box mx={'5'} mt={'5'}>
                     <FormLabel>Mark delivery started</FormLabel>
-                    <Button bgColor={'blue.200'} size={'sm'} _hover={{bgColor: 'blue.400'}} onClick={ ()=> markDeliveringOrder(data.id) } >Start</Button>
+                    <Button bgColor={'blue.200'} size={'sm'} _hover={{bgColor: 'blue.400'}} onClick={ ()=> markDeliveringOrder(data.id, toast) } >Start</Button>
                 </Box>
                 : <></>}
 
@@ -154,10 +149,7 @@ function Item({ data }) {
                 <>
                 <Box mx={'5'} mt={'5'}>
                     <FormLabel>Mark delivery completed</FormLabel>
-                    <Button bgColor={'green.200'} size={'sm'} _hover={{bgColor: 'green.400'}} onClick={ () => markDeliveredOrder(data.id) } >Completed</Button>
-                </Box>
-                <Box className="switch" data-isOn={isOn} onClick={toggleSwitch}>
-                  <motion.div className="handle" layout transition={spring} />
+                    <Button bgColor={'green.200'} size={'sm'} _hover={{bgColor: 'green.400'}} onClick={ () => markDeliveredOrder(data.id, toast) } >Completed</Button>
                 </Box>
                 </>
                 : <></>}
