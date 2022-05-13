@@ -19,12 +19,10 @@ function EmployeeHomePage() {
   }, []);
 
   function chooseOption(option) {
-    console.log('Choose option');
     setCurrentOption(() => option);
   }
 
   function logout() {
-    console.log('Logging out');
     localStorage.clear();
     window.location = '/';
     window.location.reload(false);

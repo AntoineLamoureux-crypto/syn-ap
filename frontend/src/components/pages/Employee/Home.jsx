@@ -111,7 +111,7 @@ function Home() {
   useEffect(() => {
     setData();
     getStats();
-  }, []);
+  });
 
   return (
     <Box w={'full'}>

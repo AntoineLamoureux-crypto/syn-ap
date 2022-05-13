@@ -77,10 +77,10 @@ function UserDetails({ currentUser }) {
           </Box>
         </Box>
       </GridItem>
-      <GridItem colSpan={'2'} w={'full'} px={'auto'}>
-        <Grid templateColumns={'repeat(3, 1fr)'} gap={5} pt={5}>
-          <GridItem colSpan={'1'} px={'auto'}>
-            <Box display={'flex'} p={1} m={2} borderRadius={'sm'}>
+      <GridItem colSpan={'2'} w={'full'}>
+        <Grid templateColumns={'repeat(3, 1fr)'} pt={5}>
+          <GridItem colSpan={'1'} pl={20}>
+            <Box display={'inline-flex'} p={1} m={2} borderRadius={'sm'}>
               <Box
                 as="section"
                 pt={{ base: '4', md: '8' }}
@@ -120,8 +120,49 @@ function UserDetails({ currentUser }) {
               </Box>
             </Box>
           </GridItem>
-
-          <GridItem colSpan={'1'} w={'full'} px={'auto'}>
+          <GridItem colSpan={'1'} w={'full'} px={'auto'} pl={20}>
+            <Box display={'flex'} p={1} m={2} borderRadius={'sm'}>
+              <Box
+                as="section"
+                pt={{ base: '4', md: '8' }}
+                pb={{ base: '12', md: '24' }}
+              >
+                <Box
+                  bg="bg-surface"
+                  px={{ base: '4', md: '6' }}
+                  py="5"
+                  borderRadius="lg"
+                  shadow={'lg'}
+                >
+                  <Stack spacing="4" direction={'row'}>
+                    <HStack>
+                      <Icon
+                        as={GrCompliance}
+                        bgColor={'darkcyan'}
+                        borderRadius={'xl'}
+                        size={'50px'}
+                        p={2}
+                        color={'white'}
+                        boxSize={{ base: '12', sm: '14' }}
+                        boxShadow={'sm'}
+                      />
+                      <Box>
+                        <HStack>
+                          <Badge variant="subtle" colorScheme="blue">
+                            MY JOB
+                          </Badge>
+                        </HStack>
+                        <Text color="muted" fontSize="sm">
+                          {currentUser.username}
+                        </Text>
+                      </Box>
+                    </HStack>
+                  </Stack>
+                </Box>
+              </Box>
+            </Box>
+          </GridItem>
+          <GridItem colSpan={'1'} w={'full'} px={'auto'} pl={10}>
             <Box display={'flex'} p={1} m={2} borderRadius={'sm'}>
               <Box
                 as="section"
@@ -155,48 +196,6 @@ function UserDetails({ currentUser }) {
                         </HStack>
                         <Text color="muted" fontSize="sm">
                           {currentUser.totalOrdersCompleted}
-                        </Text>
-                      </Box>
-                    </HStack>
-                  </Stack>
-                </Box>
-              </Box>
-            </Box>
-          </GridItem>
-          <GridItem colSpan={'1'} w={'full'} px={'auto'}>
-            <Box display={'flex'} p={1} m={2} borderRadius={'sm'}>
-              <Box
-                as="section"
-                pt={{ base: '4', md: '8' }}
-                pb={{ base: '12', md: '24' }}
-              >
-                <Box
-                  bg="bg-surface"
-                  px={{ base: '4', md: '6' }}
-                  py="5"
-                  borderRadius="lg"
-                  shadow={'lg'}
-                >
-                  <Stack spacing="4" direction={'row'}>
-                    <HStack>
-                      <Icon
-                        as={GrCompliance}
-                        bgColor={'darkcyan'}
-                        borderRadius={'xl'}
-                        size={'50px'}
-                        p={2}
-                        color={'white'}
-                        boxSize={{ base: '12', sm: '14' }}
-                        boxShadow={'sm'}
-                      />
-                      <Box>
-                        <HStack>
-                          <Badge variant="subtle" colorScheme="blue">
-                            Overview
-                          </Badge>
-                        </HStack>
-                        <Text color="muted" fontSize="sm">
-                          {currentUser.username}
                         </Text>
                       </Box>
                     </HStack>

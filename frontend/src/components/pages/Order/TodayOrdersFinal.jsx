@@ -169,10 +169,10 @@ export default function TodayOrdersFinal() {
                     as="span"
                     bgColor={
                       value.orderStatus === 'DELIVERED'
-                        ? 'red.400'
+                        ? 'green.400'
                         : value.orderStatus === 'READY'
                         ? 'blue.400'
-                        : 'green.400'
+                        : 'red.400'
                     }
                     color={'white'}
                     borderRadius={'sm'}
@@ -193,8 +193,10 @@ export default function TodayOrdersFinal() {
                     boxSize={'25px'}
                     color={
                       value.orderStatus === 'DELIVERED'
-                        ? 'green.500'
-                        : 'red.500'
+                        ? 'green.400'
+                        : value.orderStatus === 'READY'
+                        ? 'blue.400'
+                        : 'red.400'
                     }
                   />
                 </HStack>
@@ -276,9 +278,9 @@ export default function TodayOrdersFinal() {
                 w={'90px'}
                 size={'sm'}
                 bgColor={
-                  filterOption == 'DELIVERING' ? 'turquoise' : 'gray.100'
+                  filterOption === 'DELIVERING' ? 'turquoise' : 'gray.100'
                 }
-                color={filterOption == 'DELIVERING' ? 'white' : 'black'}
+                color={filterOption === 'DELIVERING' ? 'white' : 'black'}
                 onClick={() => setFilterOption('DELIVERING')}
               >
                 EN COURS
@@ -289,8 +291,8 @@ export default function TodayOrdersFinal() {
                 _focus={{ boxShadow: 'none' }}
                 w={'90px'}
                 size={'sm'}
-                bgColor={filterOption == 'READY' ? 'turquoise' : 'gray.100'}
-                color={filterOption == 'READY' ? 'white' : 'black'}
+                bgColor={filterOption === 'READY' ? 'turquoise' : 'gray.100'}
+                color={filterOption === 'READY' ? 'white' : 'black'}
                 onClick={() => setFilterOption('READY')}
               >
                 PRÊT
@@ -301,8 +303,10 @@ export default function TodayOrdersFinal() {
                 _focus={{ boxShadow: 'none' }}
                 w={'90px'}
                 size={'sm'}
-                bgColor={filterOption == 'DELIVERED' ? 'turquoise' : 'gray.100'}
-                color={filterOption == 'DELIVERED' ? 'white' : 'black'}
+                bgColor={
+                  filterOption === 'DELIVERED' ? 'turquoise' : 'gray.100'
+                }
+                color={filterOption === 'DELIVERED' ? 'white' : 'black'}
                 onClick={() => setFilterOption('DELIVERED')}
               >
                 LIVRÉES

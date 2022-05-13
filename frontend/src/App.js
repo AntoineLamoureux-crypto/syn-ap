@@ -10,14 +10,12 @@ function App() {
   const deliverer = localStorage.getItem('currentDeliverer');
   const employee = localStorage.getItem('currentEmployee')
   return (
-    <>
       <Routes history={history} >
         {deliverer && <Route path="/" exact element={<DelivererHomePage />} />}
         {employee && <Route path="/" exact element={<EmployeeHomePage />} />}
         <Route path="/signUp" exact element={<SignUp />} />
         <Route path="/" exact element={<Login />} />
       </Routes>
-    </>
   );
 }
 

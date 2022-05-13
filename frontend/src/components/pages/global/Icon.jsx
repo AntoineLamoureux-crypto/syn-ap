@@ -1,5 +1,3 @@
-import { DragControls } from 'framer-motion';
-
 export function ReorderIcon({ dragControls }) {
   return (
     <svg
