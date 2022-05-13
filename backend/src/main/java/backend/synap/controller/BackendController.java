@@ -58,4 +58,14 @@ public class BackendController {
     public List<Deliverer> getAllDeliverers() {
         return service.getAllDeliverers();
     }
+
+    @GetMapping("/getDelivererStats/{id}")
+    public List<String> getDelivererStats(@PathVariable String id) {
+        return service.getDelivererStats(id);
+    }
+
+    @GetMapping("/getGeneralStats")
+    public List<String> getGeneralStats() {
+        return service.getGeneralStats();
+    }
 }

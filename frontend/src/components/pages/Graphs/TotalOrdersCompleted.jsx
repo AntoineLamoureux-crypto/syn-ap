@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 function TotalOrdersCompleted() {
-  return (
-    <div>TotalOrdersCompleted</div>
-  )
+  return <div>TotalOrdersCompleted</div>;
 }
 
-export default TotalOrdersCompleted
+export default TotalOrdersCompleted;

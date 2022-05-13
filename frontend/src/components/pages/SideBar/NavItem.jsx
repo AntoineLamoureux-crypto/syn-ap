@@ -1,48 +1,65 @@
-import React from 'react'
+import React from 'react';
 import {
-    Flex,
-    Text,
-    Icon,
-    Link,
-    Menu,
-    MenuButton,
-    MenuList
-} from '@chakra-ui/react'
-import NavHoverBox from './NavHoverBox'
+  Flex,
+  Text,
+  Icon,
+  Link,
+  Menu,
+  MenuButton,
+  Box,
+} from '@chakra-ui/react';
 
-export default function NavItem({ icon, title, description, active, navSize, chooseOption }) {
-    return (
-        <Flex
-            mt={30}
-            flexDir="column"
-            w="100%"
-            alignItems={navSize === "small" ? "center" : "flex-start"}
+export default function NavItem({
+  icon,
+  title,
+  navSize,
+  chooseOption,
+  currentOption,
+}) {
+  return (
+    <Flex
+      mb={5}
+      flexDir="column"
+      w="100%"
+      alignItems={navSize === 'small' ? 'center' : 'flex-start'}
+    >
+      <Menu placement="right">
+        <Link
+          p={3}
+          borderRadius={8}
+          w={navSize === 'large' && '100%'}
+          boxShadow={currentOption === title ? 'md' : 'none'}
         >
-            <Menu placement="right">
-                <Link
-                    backgroundColor={active && "#AEC8CA"}
-                    p={3}
-                    borderRadius={8}
-                    _hover={{ textDecor: 'none', backgroundColor: "#AEC8CA" }}
-                    w={navSize === "large" && "100%"}
+          <MenuButton w="100%" onClick={() => chooseOption(title)}>
+            <Box display={'flex'} justifyContent={'flex-start'}>
+              <Box
+                px={2}
+                bgColor={currentOption === title ? 'turquoise' : 'none'}
+                pb={0.5}
+                pt={2}
+                borderRadius={'full'}
+              >
+                <Icon
+                  as={icon}
+                  fontSize="xl"
+                  color={currentOption === title ? 'white' : 'turquoise'}
+                />
+              </Box>
+              <Box my={'auto'}>
+                <Text
+                  ml={5}
+                  display={navSize === 'small' ? 'none' : 'flex'}
+                  fontFamily={'heading'}
+                  fontWeight={'semibold'}
+                  textColor={currentOption === title ? 'black' : 'gray'}
                 >
-                    <MenuButton w="100%" onClick={()=> chooseOption(title)}>
-                        <Flex>
-                            <Icon as={icon} fontSize="xl" color={active ? "#82AAAD" : "gray.500"} />
-                            <Text ml={5} display={navSize === "small" ? "none" : "flex"}>{title}</Text>
-                        </Flex>
-                    </MenuButton>
-                </Link>
-                <MenuList
-                    py={0}
-                    border="none"
-                    w={200}
-                    h={200}
-                    ml={5}
-                >
-                    <NavHoverBox title={title} icon={icon} description={description} />
-                </MenuList>
-            </Menu>
-        </Flex>
-    )
+                  {title}
+                </Text>
+              </Box>
+            </Box>
+          </MenuButton>
+        </Link>
+      </Menu>
+    </Flex>
+  );
 }

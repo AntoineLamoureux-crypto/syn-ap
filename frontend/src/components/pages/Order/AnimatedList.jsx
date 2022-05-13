@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 function AnimatedList() {
-  return (
-    <div>AnimatedList</div>
-  )
+  return <div>AnimatedList</div>;
 }
 
-export default AnimatedList
+export default AnimatedList;
